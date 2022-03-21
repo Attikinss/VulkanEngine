@@ -10,6 +10,10 @@ workspace "VulkanEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+ThirdParty = {}
+ThirdParty["GLFW"] = "Engine/thirdparty/GLFW"
+ThirdParty["VK"] = "$(VULKAN_SDK)"
+
 project "Program"
     location "Program"
     kind "ConsoleApp"
@@ -62,6 +66,18 @@ project "Engine"
 
     includedirs {
         "%{prj.name}/src",
+        "%{ThirdParty.GLFW}/include",
+        "%{ThirdParty.VK}/include"
+    }
+
+    libdirs {
+        "%{ThirdParty.GLFW}/lib",
+        "%{ThirdParty.VK}/lib"
+    }
+
+    links {
+        "glfw3_mt.lib",
+        "vulkan-1.lib"
     }
 
     filter "system:windows"
