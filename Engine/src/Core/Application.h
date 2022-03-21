@@ -1,8 +1,13 @@
 #pragma once
 
 namespace VKE {
+	class Window;
+
 	class Application {
 	public:
+		Application() = default;
+		~Application();
+
 		void Initialise();
 		void Run();
 		void Shutdown();
@@ -10,5 +15,7 @@ namespace VKE {
 	private:
 		bool m_Running = false;
 		bool m_Initialised = false;
+
+		Window* m_Window = nullptr;
 	};
 }
